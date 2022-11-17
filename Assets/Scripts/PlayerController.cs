@@ -104,10 +104,8 @@ public class PlayerController : MonoBehaviour
         LockMovement();
 
         if (spriteRenderer.flipX == true) {
-            print("attack left");
             swordAttack.AttackLeft();
         } else {
-            print("attack right");
             swordAttack.AttackRight();
         }
     }
