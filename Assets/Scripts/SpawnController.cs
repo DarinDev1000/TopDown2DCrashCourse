@@ -8,7 +8,7 @@ public class SpawnController : MonoBehaviour
     public GameObject slimePrefab;
     public int spawnSpeed = 10;
     public int spawnRange = 2;
-    public int maxNumber = 20;
+    public int maxNumber = 20; // TODO: Do this
 
     // Start is called before the first frame update
     void Start()
