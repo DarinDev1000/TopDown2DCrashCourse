@@ -29,19 +29,35 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate() {
         // If movement input is not 0, try to move
         if (movementInput != Vector2.zero){
-            // Check for potential collisions
-            int count = rb.Cast(
-                movementInput, // X and Y values between -1 and 1 that represent the direction from the body to look for collisions
-                movementFilter, // The settings that determine where a collision can occur on such as layers to collide with
-                castCollisions, // List of collisions to store the found collisions into after the Cast is finished
-                moveSpeed * Time.fixedDeltaTime + collisionOffset // The amount to case equal to the movement plus an offset
-            );
+            bool success = TryMove(movementInput);
 
-            // Move if no collisions
-            if (count == 0) {
-                rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * movementInput);
+            // If we can't move in a diagonal direction, try moving in only X or Y
+            if (!success) {
+                // Try to move along X
+                success = TryMove(new Vector2(movementInput.x, 0));
+                // Else try to move along Y
+                if (!success) {
+                    TryMove(new Vector2(0, movementInput.y));
+                }
             }
         }
+    }
+
+    private bool TryMove(Vector2 direction) {
+        // Check for potential collisions
+        int count = rb.Cast(
+            direction, // X and Y values between -1 and 1 that represent the direction from the body to look for collisions
+            movementFilter, // The settings that determine where a collision can occur on such as layers to collide with
+            castCollisions, // List of collisions to store the found collisions into after the Cast is finished
+            moveSpeed * Time.fixedDeltaTime + collisionOffset // The amount to case equal to the movement plus an offset
+        );
+
+        // Move if no collisions
+        if (count == 0) {
+            rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * direction);
+            return true;
+        }
+        return false;
     }
 
     void OnMove(InputValue movementValue) {
