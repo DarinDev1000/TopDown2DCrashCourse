@@ -52,5 +52,7 @@
         "Temp/": true
     },
     "editor.formatOnSave": true,
-    "editor.formatOnPaste": true
+    "editor.formatOnPaste": true,
+    "editor.detectIndentation": false,
+    "editor.tabSize": 4,
 }

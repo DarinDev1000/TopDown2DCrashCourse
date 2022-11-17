@@ -30,50 +30,62 @@ public class PlayerController : MonoBehaviour
     // // Update is called once per frame
     // void Update()
     // {
-        
+
     // }
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         // If movement is locked, exit
-        if (!canMove) {
+        if (!canMove)
+        {
             return;
         }
 
         // If movement input is not 0, try to move
-        if (movementInput != Vector2.zero){
+        if (movementInput != Vector2.zero)
+        {
             // Debug.Log($"X: {movementInput.x}  Y: {movementInput.y}");
             // print($"X: {movementInput.x}  Y: {movementInput.y}");
             bool success = TryMove(movementInput);
 
             // If we can't move in a diagonal direction, try moving in only X or Y
-            if (!success) {
+            if (!success)
+            {
                 // Try to move along X
                 success = TryMove(new Vector2(movementInput.x, 0));
             }
-            if (!success) {
+            if (!success)
+            {
                 // Else try to move along Y
                 success = TryMove(new Vector2(0, movementInput.y));
             }
 
             // Set isMoving if moving
             animator.SetBool("isMoving", success);
-        } else {
+        }
+        else
+        {
             animator.SetBool("isMoving", false);
         }
 
         // Set direction of sprite to movement direction
-        if (movementInput.x < 0) {
+        if (movementInput.x < 0)
+        {
             spriteRenderer.flipX = true;
             swordAttack.FaceLeft();
-        } else if (movementInput.x > 0) {
+        }
+        else if (movementInput.x > 0)
+        {
             spriteRenderer.flipX = false;
             swordAttack.FaceRight();
         }
     }
 
-    private bool TryMove(Vector2 direction) {
+    private bool TryMove(Vector2 direction)
+    {
         // Check if no movement
-        if (direction == Vector2.zero) {
+        if (direction == Vector2.zero)
+        {
             return false;
         }
 
@@ -86,44 +98,55 @@ public class PlayerController : MonoBehaviour
         );
 
         // Move if no collisions
-        if (count == 0) {
+        if (count == 0)
+        {
             rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * direction);
             return true;
         }
         return false;
     }
 
-    void OnMove(InputValue movementValue) {
+    void OnMove(InputValue movementValue)
+    {
         movementInput = movementValue.Get<Vector2>();
     }
 
     // Attack on fire(left mouse) click
-    void OnFire() {
-        if (swordAttack.CheckAttackCooldown()) {
+    void OnFire()
+    {
+        if (swordAttack.CheckAttackCooldown())
+        {
             animator.SetTrigger("swordAttack");
         }
     }
 
-    public void StartSwordAttack() {
+    public void StartSwordAttack()
+    {
         LockMovement();
 
-        if (spriteRenderer.flipX == true) {
+        if (spriteRenderer.flipX == true)
+        {
             swordAttack.AttackLeft();
-        } else {
+        }
+        else
+        {
             swordAttack.AttackRight();
         }
     }
 
-    public void EndSwordAttack() {
+    public void EndSwordAttack()
+    {
         UnlockMovement();
         swordAttack.StopAttack();
     }
 
-    public void LockMovement() {
+    public void LockMovement()
+    {
         canMove = false;
     }
 
-    public void UnlockMovement() {
+    public void UnlockMovement()
+    {
         canMove = true;
     }
 }
