@@ -8,6 +8,7 @@ public class SpawnController : MonoBehaviour
     public GameObject slimePrefab;
     public int spawnSpeed = 10;
     public int spawnRange = 2;
+    public int maxNumber = 20;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +24,7 @@ public class SpawnController : MonoBehaviour
 
     private void FixedUpdate() {
         // print("Fixed update on SpawnController");
-         System.Random rnd = new();
+        System.Random rnd = new();
         int number = rnd.Next(0,1000);
         if (number < spawnSpeed) {
             float randX = rnd.Next(-spawnRange*100,spawnRange*100)*0.01f;
