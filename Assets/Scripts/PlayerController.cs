@@ -33,16 +33,18 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate() {
         // If movement input is not 0, try to move
         if (movementInput != Vector2.zero){
+            // Debug.Log($"X: {movementInput.x}  Y: {movementInput.y}");
+            // print($"X: {movementInput.x}  Y: {movementInput.y}");
             bool success = TryMove(movementInput);
 
             // If we can't move in a diagonal direction, try moving in only X or Y
             if (!success) {
                 // Try to move along X
                 success = TryMove(new Vector2(movementInput.x, 0));
+            }
+            if (!success) {
                 // Else try to move along Y
-                if (!success) {
-                    TryMove(new Vector2(0, movementInput.y));
-                }
+                success = TryMove(new Vector2(0, movementInput.y));
             }
 
             // Set isMoving if moving
@@ -60,6 +62,11 @@ public class PlayerController : MonoBehaviour
     }
 
     private bool TryMove(Vector2 direction) {
+        // Check if no movement
+        if (direction == Vector2.zero) {
+            return false;
+        }
+
         // Check for potential collisions
         int count = rb.Cast(
             direction, // X and Y values between -1 and 1 that represent the direction from the body to look for collisions

@@ -4497,14 +4497,6 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: -0.15989104
       objectReference: {fileID: 0}
-    - target: {fileID: 8849036036823204859, guid: 452f7fc9617e4514484466c8dfc6188c, type: 3}
-      propertyPath: m_Actions
-      value: 
-      objectReference: {fileID: -944628639613478452, guid: 3325d948cdf98ca438449bf20ca45ebf, type: 3}
-    - target: {fileID: 8849036036823204859, guid: 452f7fc9617e4514484466c8dfc6188c, type: 3}
-      propertyPath: m_DefaultActionMap
-      value: Player
-      objectReference: {fileID: 0}
     - target: {fileID: 9196352409997655205, guid: 452f7fc9617e4514484466c8dfc6188c, type: 3}
       propertyPath: m_Name
       value: Player
