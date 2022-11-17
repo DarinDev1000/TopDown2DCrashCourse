@@ -97,7 +97,9 @@ public class PlayerController : MonoBehaviour
 
     // Attack on fire(left mouse) click
     void OnFire() {
-        animator.SetTrigger("swordAttack");
+        if (swordAttack.CheckAttackCooldown()) {
+            animator.SetTrigger("swordAttack");
+        }
     }
 
     public void StartSwordAttack() {

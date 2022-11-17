@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: e2b282dac99fd3f468b11986bdb67d5b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - slimePrefab: {fileID: 5367630958083695824, guid: 2e1936b2abcc09944816cdc0baf06729, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
