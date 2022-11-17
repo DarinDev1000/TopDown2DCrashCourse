@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     readonly List<RaycastHit2D> castCollisions = new();
 
+    bool canMove = true;
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +33,11 @@ public class PlayerController : MonoBehaviour
     // }
 
     private void FixedUpdate() {
+        // If movement is locked, exit
+        if (!canMove) {
+            return;
+        }
+
         // If movement input is not 0, try to move
         if (movementInput != Vector2.zero){
             // Debug.Log($"X: {movementInput.x}  Y: {movementInput.y}");
@@ -85,5 +92,18 @@ public class PlayerController : MonoBehaviour
 
     void OnMove(InputValue movementValue) {
         movementInput = movementValue.Get<Vector2>();
+    }
+
+    // Attack on fire(left mouse) click
+    void OnFire() {
+        animator.SetTrigger("swordAttack");
+    }
+
+    public void LockMovement() {
+        canMove = false;
+    }
+
+    public void UnlockMovement() {
+        canMove = true;
     }
 }
