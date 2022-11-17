@@ -146412,8 +146412,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slimePrefab: {fileID: 5367630958083695824, guid: 2e1936b2abcc09944816cdc0baf06729, type: 3}
-  spawnSpeed: 10
-  spawnRange: 4
+  spawnSpeed: 20
+  spawnRange: 5
 --- !u!4 &1649074068
 Transform:
   m_ObjectHideFlags: 0
@@ -146589,10 +146589,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1410178077068871933, guid: 452f7fc9617e4514484466c8dfc6188c, type: 3}
-      propertyPath: m_TagString
-      value: Weapon
-      objectReference: {fileID: 0}
     - target: {fileID: 9196352409997655205, guid: 452f7fc9617e4514484466c8dfc6188c, type: 3}
       propertyPath: m_Name
       value: Player

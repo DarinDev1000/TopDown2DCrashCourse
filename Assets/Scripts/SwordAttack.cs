@@ -7,7 +7,7 @@ public class SwordAttack : MonoBehaviour
     public Collider2D swordCollider;
     public float damage = 1;
     public float timeBetweenAttacks = 0.5f;
-    private float attackCooldown = 0f;
+    private float attackCooldown = 1f;
     private bool isCollidingWithEnemy = false;
     private Enemy collidingEnemy;
 
@@ -15,25 +15,35 @@ public class SwordAttack : MonoBehaviour
 
      // Start is called before the first frame update
     private void Start() {
-        swordCollider = GetComponent<Collider2D>();
+        // swordCollider = GetComponent<Collider2D>();
         attackOffsetX = transform.localPosition;
+        // Physics2D.IgnoreLayerCollision(0, 8);
     }
 
         private void Update() {
         attackCooldown += Time.deltaTime;
     }
 
+    public void FaceRight() {
+        transform.localPosition = attackOffsetX;
+    }
+
+     public void FaceLeft() {
+        transform.localPosition =  new Vector3(attackOffsetX.x * -1, attackOffsetX.y);
+    }
+
     public void AttackRight() {
         // swordCollider.enabled = true;
-        transform.localPosition = attackOffsetX;
+        // transform.localPosition = attackOffsetX;
         DoAttack();
     }
 
     public void AttackLeft() {
         // swordCollider.enabled = true;
-        transform.localPosition = new Vector3(attackOffsetX.x * -1, attackOffsetX.y);
+        // transform.localPosition = new Vector3(attackOffsetX.x * -1, attackOffsetX.y);
         DoAttack();
     }
+
     public void StopAttack() {
         // swordCollider.enabled = false;
     }
@@ -60,7 +70,7 @@ public class SwordAttack : MonoBehaviour
 //     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        // print("OnTriggerEnter2D");
+        print("OnTriggerEnter2D");
         if (other.tag == "Enemy") {
             Enemy enemy = other.GetComponent<Enemy>();
             collidingEnemy = enemy;
@@ -73,7 +83,7 @@ public class SwordAttack : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        // print("OnTriggerExit2D");
+        print("OnTriggerExit2D");
         if (other.tag == "Enemy") {
             Enemy enemy = other.GetComponent<Enemy>();
             if (enemy != null) {
