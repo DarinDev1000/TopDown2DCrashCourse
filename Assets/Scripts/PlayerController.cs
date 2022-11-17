@@ -1,8 +1,7 @@
-using System.Numerics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// using Vector2 = UnityEngine.Vector2;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,15 +22,11 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        
-    }
-
-    // private void FixedUpdate() {
-    //     // If movement input is not 0, try to move
-    //     if (movementInput != Vector2.zero){
+        // If movement input is not 0, try to move
+        if (movementInput != Vector2.zero){
             
-    //     }
-    // }
+        }
+    }
 
     void OnMove(InputValue movementValue) {
         movementInput = movementValue.Get<Vector2>();
