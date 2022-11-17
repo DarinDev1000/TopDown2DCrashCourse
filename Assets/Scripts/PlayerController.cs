@@ -64,10 +64,8 @@ public class PlayerController : MonoBehaviour
         // Set direction of sprite to movement direction
         if (movementInput.x < 0) {
             spriteRenderer.flipX = true;
-            // swordAttack.attackDirection = SwordAttack.AttackDirection.left;
         } else if (movementInput.x > 0) {
             spriteRenderer.flipX = false;
-            // swordAttack.attackDirection = SwordAttack.AttackDirection.right;
         }
     }
 
@@ -116,6 +114,7 @@ public class PlayerController : MonoBehaviour
 
     public void EndSwordAttack() {
         UnlockMovement();
+        swordAttack.StopAttack();
     }
 
     public void LockMovement() {
