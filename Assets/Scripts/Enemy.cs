@@ -6,7 +6,8 @@ public class Enemy : MonoBehaviour
 {
     Animator animator;
 
-    private float health = 2;
+    public float maxHealth;
+    private float health;
     public float Health
     {
         set
@@ -26,21 +27,23 @@ public class Enemy : MonoBehaviour
 
     public enum EnemyAnimationState
     {
-        idle,
-        lowJumping,
-        highJumping,
-        isWorried
+        isIdle,
+        isLowJumping,
+        isHighJumping,
+        isWorried,
+        isDefeated
     }
     // EnemyAnimationState animationState = EnemyAnimationState.idle;
 
     void Start()
     {
+        health = maxHealth;
         animator = GetComponent<Animator>();
     }
 
     public void Defeated()
     {
-        animator.SetTrigger("Defeated");
+        animator.SetBool(EnemyAnimationState.isDefeated.ToString(), true);
     }
 
     public void RemoveEnemy()
@@ -51,7 +54,7 @@ public class Enemy : MonoBehaviour
     private void FixedUpdate()
     {
         // Change animation if low health
-        if (Health <= 1)
+        if (Health < maxHealth)
         {
             SetAnimationState(EnemyAnimationState.isWorried);
         }
@@ -73,7 +76,7 @@ public class Enemy : MonoBehaviour
 
     public void Idle()
     {
-        SetAnimationState(EnemyAnimationState.idle);
+        SetAnimationState(EnemyAnimationState.isIdle);
     }
 
     public void Jump()
@@ -82,11 +85,11 @@ public class Enemy : MonoBehaviour
         int number = rnd.Next(0, 2);
         if (number == 0)
         {
-            SetAnimationState(EnemyAnimationState.lowJumping);
+            SetAnimationState(EnemyAnimationState.isLowJumping);
         }
         else
         {
-            SetAnimationState(EnemyAnimationState.highJumping);
+            SetAnimationState(EnemyAnimationState.isHighJumping);
         }
     }
 
@@ -97,7 +100,7 @@ public class Enemy : MonoBehaviour
         animator.SetBool("isWorried", false);
 
         //  Set animation state true
-        if (state != EnemyAnimationState.idle)
+        if (state != EnemyAnimationState.isIdle)
         {
             animator.SetBool(state.ToString(), true);
         }
