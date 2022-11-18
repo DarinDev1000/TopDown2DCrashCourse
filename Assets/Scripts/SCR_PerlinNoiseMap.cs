@@ -124,8 +124,10 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
         GameObject tileGroup = tileGroups[tileId];
         GameObject tile = Instantiate(tilePrefab, tileGroup.transform);
 
-        float xUnit = x * unitPixels;
-        float yUnit = y * unitPixels;
+        // Scale to 16 pixel tiles and center map
+        float xUnit = x * unitPixels - mapWidth * unitPixels / 2;
+        float yUnit = y * unitPixels - mapHeight * unitPixels / 2;
+
         tile.name = string.Format("time_x{0}_y{1}", xUnit, yUnit);
         tile.transform.localPosition = new Vector3(xUnit, yUnit, 0);
 

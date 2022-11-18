@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public float speed = 0.5f;
-    public Camera mainCamera = Camera.main;  // assign in the inspector
+    public Camera mainCamera;  // assign in the inspector
 
     private float cameraSize;
 
