@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class SCR_PerlinNoiseMap : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
     public GameObject prefabDirt;
     public GameObject prefabGrass;
     // public GameObject prefabGrassPlant;
-    // public GameObject prefabBush;
+    public GameObject prefabBush;
     public GameObject dirtTop;
     public GameObject dirtBottom;
     public GameObject dirtLeft;
@@ -49,6 +50,9 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
     List<List<int>> noiseGrid = new();
     List<List<GameObject>> tileGrid = new();
 
+    public Grid tilemapGrid;
+    public Tilemap tilemap;
+
 
     // Start is called before the first frame update
     void Start()
@@ -70,8 +74,8 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
         {
             { 0, prefabDirt },
             { 1, prefabGrass },
+            { 2, prefabBush }
             // { tileOrder[2], prefabGrassPlant },
-            // { tileOrder[3], prefabBush }
         };
 
         dirtEdgeTileset = new()
@@ -180,6 +184,7 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
         GameObject tilePrefab = tileset[tileId];
         GameObject tileGroup = tileGroups[tileId];
         GameObject tile = Instantiate(tilePrefab, tileGroup.transform);
+        // GameObject tile = tilemap.SetTile(new Vector3(x, y, 0));
 
         // Scale to 16 pixel tiles and center map
         float xUnit = x * unitPixels - mapWidth * unitPixels / 2;
