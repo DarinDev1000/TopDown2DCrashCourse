@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eff5bf0f8aaacd2488cbd248c43b1cd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swordCollider: {fileID: 0}
+  swordCollider: {fileID: 647706337819840040}
   damage: 1
   timeBetweenAttacks: 0.8
 --- !u!50 &6096591315069124936
