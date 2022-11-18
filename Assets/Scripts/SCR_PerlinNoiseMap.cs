@@ -34,6 +34,11 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
 
     void CreateTileset()
     {
+        /**
+            Collect and assign ID codes to the tile prefab, for ease of access.
+            Best ordered to match land elevation.
+        **/
+
         tileset = new()
         {
             { tileOrder[0], prefabDirt },
@@ -45,6 +50,11 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
 
     void CreateTileGroups()
     {
+        /**
+            Create empty gameObjects for grouping tiles of the same type,
+            ie dirt tiles
+        **/
+
         tileGroups = new();
         foreach (KeyValuePair<int, GameObject> prefabPair in tileset)
         {
@@ -58,6 +68,11 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
 
     void GenerateMap()
     {
+        /**
+            Generate a 2D grid using the Perlin noise function, storing it as
+            both raw ID values and tile gameObjects
+        **/
+
         // Loop through all x values
         for (int x = 0; x < mapWidth; x++)
         {
@@ -77,6 +92,12 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
 
     int GetIdUsingPerlin(int x, int y)
     {
+        /**
+           Using a grid to coordinate input, generate a Perlin noise values
+           to be converted into a tile ID code. Rescale the normalized Perlin value
+           to the number of tiles available.
+       **/
+
         float xModified = (x - xOffset) / magnification;
         float yModified = (y - yOffset) / magnification;
         float rawPerlin = Mathf.PerlinNoise(xModified, yModified); // Works better with float inputs
@@ -94,12 +115,19 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
 
     void CreateTile(int tileId, int x, int y)
     {
+        /**
+           Creates a new tile using the type id code, group it with common tiles,
+           set it's position and store the gameObject.
+       **/
+
         GameObject tilePrefab = tileset[tileId];
         GameObject tileGroup = tileGroups[tileId];
         GameObject tile = Instantiate(tilePrefab, tileGroup.transform);
 
-        tile.name = string.Format("time_x{0}_y{1}", x, y);
-        tile.transform.localPosition = new Vector3(x * unitPixels, y * unitPixels, 0);
+        float xUnit = x * unitPixels;
+        float yUnit = y * unitPixels;
+        tile.name = string.Format("time_x{0}_y{1}", xUnit, yUnit);
+        tile.transform.localPosition = new Vector3(xUnit, yUnit, 0);
 
         tileGrid[x].Add(tile);
     }
