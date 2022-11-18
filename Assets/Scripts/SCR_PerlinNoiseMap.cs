@@ -25,6 +25,14 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
     public GameObject dirtInnerBottomLeft;
     public GameObject dirtInnerBottomRight;
     public GameObject dirtSingle;
+    public GameObject dirtLeftTopBottom;
+    public GameObject dirtTopBottom;
+    public GameObject dirtRightTopBottom;
+    public GameObject dirtTopLeftRight;
+    public GameObject dirtLeftRight;
+    public GameObject dirtBottomLeftRight;
+    public GameObject dirtInnerTopLeftAndBottomRight;
+    public GameObject dirtInnerTopRightAndBottomLeft;
 
     public int mapWidth = 160;
     public int mapHeight = 90;
@@ -77,7 +85,15 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
             { 10, dirtInnerTopRight },
             { 11, dirtInnerBottomLeft },
             { 12, dirtInnerBottomRight },
-            { 13, dirtSingle }
+            { 13, dirtSingle },
+            { 14, dirtLeftTopBottom },
+            { 15, dirtTopBottom },
+            { 16, dirtRightTopBottom },
+            { 17, dirtTopLeftRight },
+            { 18, dirtLeftRight },
+            { 19, dirtBottomLeftRight },
+            { 20, dirtInnerTopLeftAndBottomRight },
+            { 21, dirtInnerTopRightAndBottomLeft },
         };
     }
 

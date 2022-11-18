@@ -185,6 +185,14 @@ MonoBehaviour:
   dirtInnerBottomLeft: {fileID: 8898339825272555119, guid: a5655f7f62f31154d96e02fd1145163e, type: 3}
   dirtInnerBottomRight: {fileID: 1979952682149856187, guid: cb2c0adef5c69894b81792ff441d7b8b, type: 3}
   dirtSingle: {fileID: 4527496510362940989, guid: 23ff82288adbf364b9dd76342ece5dc4, type: 3}
+  dirtLeftTopBottom: {fileID: 2759025624897509773, guid: 8aaa56901e6346f4fa0098d9602df27d, type: 3}
+  dirtTopBottom: {fileID: 5805244978638817851, guid: a4b45e4882e6f2c47bf665831d9c004d, type: 3}
+  dirtRightTopBottom: {fileID: 8228604219020583049, guid: 221bbba2dc1c3dc4cafc6f5a12e12f5d, type: 3}
+  dirtTopLeftRight: {fileID: 333714844541430204, guid: 667ce2cd08bfcd843b1a117d06acb4ff, type: 3}
+  dirtLeftRight: {fileID: 6941645995844440926, guid: 6195d2ce6e973e947810faa7a4e85d6c, type: 3}
+  dirtBottomLeftRight: {fileID: 5826631437278137302, guid: 1cf69f1d4ba79c94c9b18a8286130827, type: 3}
+  dirtInnerTopLeftAndBottomRight: {fileID: 9170242678626131629, guid: d6b5e5b946634ef4d98ee894a86294a4, type: 3}
+  dirtInnerTopRightAndBottomLeft: {fileID: 1774123512132676139, guid: 46c9875cd58fbba43a3fd2ecfc4ec80b, type: 3}
   mapWidth: 160
   mapHeight: 90
   magnification: 5
