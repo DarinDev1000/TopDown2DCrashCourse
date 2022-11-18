@@ -147264,7 +147264,7 @@ MonoBehaviour:
   spawnSpeed: 20
   spawnRepeatRate: 1
   spawnRange: 5
-  maxNumber: 20
+  maxNumber: 5
 --- !u!4 &1649074068
 Transform:
   m_ObjectHideFlags: 0
