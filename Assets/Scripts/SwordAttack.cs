@@ -85,7 +85,7 @@ public class SwordAttack : MonoBehaviour
             if (other.TryGetComponent<Enemy>(out var enemy))
             {
                 collidingEnemies.Add(enemy);
-                print($"Touching {collidingEnemies.Count} enemies");
+                // print($"Touching {collidingEnemies.Count} enemies");
                 isCollidingWithEnemy = true;
             }
         }
@@ -102,7 +102,7 @@ public class SwordAttack : MonoBehaviour
         {
             if (other.TryGetComponent<Enemy>(out var enemy))
             {
-                // collidingEnemies.Remove(enemy);
+                collidingEnemies.Remove(enemy);
                 isCollidingWithEnemy = false;
             }
         }
@@ -119,13 +119,23 @@ public class SwordAttack : MonoBehaviour
         {
             attackCooldown = 0f;
             // print(isCollidingWithEnemy);
-            print($"collidingEnemies {collidingEnemies}");
+            // print($"collidingEnemies {collidingEnemies.Count}");
             if (isCollidingWithEnemy && collidingEnemies.Count > 0)
             {
+                List<Enemy> enemiesToRemove = new();
                 foreach (var collidingEnemy in collidingEnemies)
                 {
                     collidingEnemy.Health -= damage;
+                    if (collidingEnemy.Health <= 0)
+                    {
+                        enemiesToRemove.Add(collidingEnemy);
+                    }
                 }
+                foreach (var removeEnemy in enemiesToRemove)
+                {
+                    collidingEnemies.Remove(removeEnemy);
+                }
+
             }
         }
     }
