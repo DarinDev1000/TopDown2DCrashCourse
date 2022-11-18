@@ -9,7 +9,7 @@ public class SwordAttack : MonoBehaviour
     public float timeBetweenAttacks = 0.5f;
     private float attackCooldown = 1f;
     private bool isCollidingWithEnemy = false;
-    private Enemy collidingEnemy;
+    private List<Enemy> collidingEnemies;
 
     Vector2 attackOffsetX;
 
@@ -19,6 +19,7 @@ public class SwordAttack : MonoBehaviour
         // swordCollider = GetComponent<Collider2D>();
         attackOffsetX = transform.localPosition;
         // Physics2D.IgnoreLayerCollision(0, 8);
+        collidingEnemies = new();
     }
 
     private void Update()
@@ -78,13 +79,13 @@ public class SwordAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        print("OnTriggerEnter2D");
-        if (other.tag == "Enemy")
+        // print("OnTriggerEnter2D");
+        if (other.CompareTag("Enemy"))
         {
-            Enemy enemy = other.GetComponent<Enemy>();
-            collidingEnemy = enemy;
-            if (enemy != null)
+            if (other.TryGetComponent<Enemy>(out var enemy))
             {
+                collidingEnemies.Add(enemy);
+                print($"Touching {collidingEnemies.Count} enemies");
                 isCollidingWithEnemy = true;
             }
         }
@@ -96,12 +97,12 @@ public class SwordAttack : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        print("OnTriggerExit2D");
-        if (other.tag == "Enemy")
+        // print("OnTriggerExit2D");
+        if (other.CompareTag("Enemy"))
         {
-            Enemy enemy = other.GetComponent<Enemy>();
-            if (enemy != null)
+            if (other.TryGetComponent<Enemy>(out var enemy))
             {
+                // collidingEnemies.Remove(enemy);
                 isCollidingWithEnemy = false;
             }
         }
@@ -117,18 +118,21 @@ public class SwordAttack : MonoBehaviour
         if (CheckAttackCooldown())
         {
             attackCooldown = 0f;
-            print(isCollidingWithEnemy);
-            print(collidingEnemy);
-            if (isCollidingWithEnemy && collidingEnemy != null)
+            // print(isCollidingWithEnemy);
+            print($"collidingEnemies {collidingEnemies}");
+            if (isCollidingWithEnemy && collidingEnemies.Count > 0)
             {
-                collidingEnemy.Health -= damage;
+                foreach (var collidingEnemy in collidingEnemies)
+                {
+                    collidingEnemy.Health -= damage;
+                }
             }
         }
     }
 
     public bool CheckAttackCooldown()
     {
-        print(attackCooldown);
+        // print(attackCooldown);
         if (attackCooldown >= timeBetweenAttacks) return true;
         return false;
     }

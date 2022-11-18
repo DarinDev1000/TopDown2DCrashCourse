@@ -95,8 +95,8 @@ public class Enemy : MonoBehaviour
 
     public void SetAnimationState(EnemyAnimationState state)
     {
-        animator.SetBool("lowJumping", false);
-        animator.SetBool("highJumping", false);
+        animator.SetBool("isLowJumping", false);
+        animator.SetBool("isHighJumping", false);
         animator.SetBool("isWorried", false);
 
         //  Set animation state true
