@@ -9,7 +9,7 @@ public class SpawnController : MonoBehaviour
     public int spawnSpeed = 10;
     public float spawnRepeatRate = 1f;
     public int spawnRange = 2;
-    public int maxNumber = 20; // TODO: Do this
+    public int maxNumber = 10;
 
     private readonly System.Random rnd = new();
 
@@ -37,10 +37,12 @@ public class SpawnController : MonoBehaviour
 
     private void SpawnSlime()
     {
-        print(GameObject.FindGameObjectsWithTag("Enemy").Length);
-        float randX = rnd.Next(-spawnRange * 100, spawnRange * 100) * 0.01f;
-        float randY = rnd.Next(-spawnRange * 100, spawnRange * 100) * 0.01f;
-        GameObject newSlime = Instantiate(slimePrefab, new Vector3(randX, randY, 0), Quaternion.identity);
-        newSlime.transform.parent = GameObject.Find("SlimeGroup").transform;
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length <= maxNumber)
+        {
+            float randX = rnd.Next(-spawnRange * 100, spawnRange * 100) * 0.01f;
+            float randY = rnd.Next(-spawnRange * 100, spawnRange * 100) * 0.01f;
+            GameObject newSlime = Instantiate(slimePrefab, new Vector3(randX, randY, 0), Quaternion.identity);
+            newSlime.transform.parent = GameObject.Find("SlimeGroup").transform;
+        }
     }
 }
