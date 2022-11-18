@@ -33,6 +33,10 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
     public GameObject dirtBottomLeftRight;
     public GameObject dirtInnerTopLeftAndBottomRight;
     public GameObject dirtInnerTopRightAndBottomLeft;
+    public GameObject dirtInnerTop;
+    public GameObject dirtInnerBottom;
+    public GameObject dirtInnerLeft;
+    public GameObject dirtInnerRight;
 
     public int mapWidth = 160;
     public int mapHeight = 90;
@@ -94,6 +98,10 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
             { 19, dirtBottomLeftRight },
             { 20, dirtInnerTopLeftAndBottomRight },
             { 21, dirtInnerTopRightAndBottomLeft },
+            { 22, dirtInnerTop },
+            { 23, dirtInnerBottom },
+            { 24, dirtInnerLeft },
+            { 25, dirtInnerRight },
         };
     }
 
@@ -265,10 +273,49 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
                     {
                         CreateTileEdge(0, 13, x, y);
                     }
+                    // { 14, dirtLeftTopBottom },
+                    else if (leftTile == 1 && rightTile == 0 && topTile == 1 && bottomTile == 1)
+                    {
+                        CreateTileEdge(0, 14, x, y);
+                    }
+                    // { 15, dirtTopBottom },
+                    else if (leftTile == 0 && rightTile == 0 && topTile == 1 && bottomTile == 1)
+                    {
+                        CreateTileEdge(0, 15, x, y);
+                    }
+                    // { 16, dirtRightTopBottom },
+                    else if (leftTile == 0 && rightTile == 1 && topTile == 1 && bottomTile == 1)
+                    {
+                        CreateTileEdge(0, 16, x, y);
+                    }
+                    // { 17, dirtTopLeftRight },
+                    else if (leftTile == 1 && rightTile == 1 && topTile == 1 && bottomTile == 0)
+                    {
+                        CreateTileEdge(0, 17, x, y);
+                    }
+                    // { 18, dirtLeftRight },
+                    else if (leftTile == 1 && rightTile == 1 && topTile == 0 && bottomTile == 0)
+                    {
+                        CreateTileEdge(0, 18, x, y);
+                    }
+                    // { 19, dirtBottomLeftRight },
+                    else if (leftTile == 1 && rightTile == 1 && topTile == 0 && bottomTile == 1)
+                    {
+                        CreateTileEdge(0, 19, x, y);
+                    }
+
+
+
                     // { 9, dirtInnerTopLeft },
                     // { 10, dirtInnerTopRight },
                     // { 11, dirtInnerBottomLeft },
                     // { 12, dirtInnerBottomRight },
+                    // { 20, dirtInnerTopLeftAndBottomRight },
+                    // { 21, dirtInnerTopRightAndBottomLeft },
+                    // { 22, dirtInnerTop },
+                    // { 23, dirtInnerBottom },
+                    // { 24, dirtInnerLeft },
+                    // { 25, dirtInnerRight },
                 }
             }
         }
