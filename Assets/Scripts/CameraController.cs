@@ -23,7 +23,7 @@ public class CameraController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Q))
         {
-            if (cameraSize < 100)
+            if (cameraSize < 50)
             {
                 cameraSize += speed * cameraSize / 100;
                 mainCamera.orthographicSize = cameraSize;
@@ -31,7 +31,7 @@ public class CameraController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.E))
         {
-            if (cameraSize > 5)
+            if (cameraSize > 1)
             {
                 cameraSize -= speed * cameraSize / 100;
                 mainCamera.orthographicSize = cameraSize;

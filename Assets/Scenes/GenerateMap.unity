@@ -170,10 +170,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac45fb6df2f10d14da56106188ce5903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabDirt: {fileID: 5617053371701513413, guid: b9f8958c84516154397134d7cd68293b, type: 3}
-  prefabGrass: {fileID: 6206721849596467711, guid: 6c6f67fe410ad884185d76c7569b8772, type: 3}
-  prefabGrassPlant: {fileID: 9119790860975520906, guid: f6ec8dac9d1782c4486d0fc13f9b5fd0, type: 3}
-  prefabBush: {fileID: 3002606124354560828, guid: 900deb46308f80b408861959e063ae43, type: 3}
+  prefabDirt: {fileID: 6915587291823720032, guid: b9f8958c84516154397134d7cd68293b, type: 3}
+  prefabGrass: {fileID: 4370505670041067488, guid: ac295648d2454eb4cb64a211719e862b, type: 3}
+  prefabGrassPlant: {fileID: 5198169983665491040, guid: f33b56582ef91d747a2846af597e1f35, type: 3}
+  prefabBush: {fileID: 4527496510362940989, guid: 23ff82288adbf364b9dd76342ece5dc4, type: 3}
   mapWidth: 160
   mapHeight: 90
   magnification: 14
