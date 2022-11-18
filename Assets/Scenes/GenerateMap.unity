@@ -172,11 +172,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabDirt: {fileID: 6915587291823720032, guid: b9f8958c84516154397134d7cd68293b, type: 3}
   prefabGrass: {fileID: 4370505670041067488, guid: ac295648d2454eb4cb64a211719e862b, type: 3}
-  prefabGrassPlant: {fileID: 5198169983665491040, guid: f33b56582ef91d747a2846af597e1f35, type: 3}
+  prefabGrassPlant: {fileID: 4527496510362940989, guid: 23ff82288adbf364b9dd76342ece5dc4, type: 3}
   prefabBush: {fileID: 4527496510362940989, guid: 23ff82288adbf364b9dd76342ece5dc4, type: 3}
+  dirtTop: {fileID: 8204220480350300229, guid: 0bd05059eb0c4884680097009a924fcc, type: 3}
+  dirtBottom: {fileID: 1689317422295238730, guid: da86105229affaf43a1aa1b17a48c4da, type: 3}
+  dirtLeft: {fileID: 5791461263409164636, guid: 610181805d7c59249b73d26f025d9953, type: 3}
+  dirtRight: {fileID: 4673803933323725675, guid: b2a1e9f903c808d4190b1e54dd4cffe1, type: 3}
+  dirtOuterTopLeft: {fileID: 460632488835502758, guid: 000516aabf6fed14cbede6f590a8eff4, type: 3}
+  dirtOuterTopRight: {fileID: 8744500262629003874, guid: bd6525d575b7b664c883069a548abdf3, type: 3}
+  dirtOuterBottomLeft: {fileID: 5201874397573435361, guid: 32365cfaa18bd5d4bb2978eacdd52637, type: 3}
+  dirtOuterBottomRight: {fileID: 6898749087746321559, guid: 453a59c47bef8e546a57c51ab1cbbba0, type: 3}
+  dirtInnerTopLeft: {fileID: 5091419779182284034, guid: 58d8388a1db0594469e113dd2c15aea2, type: 3}
+  dirtInnerTopRight: {fileID: 6897183186895900206, guid: f33b56582ef91d747a2846af597e1f35, type: 3}
+  dirtInnerBottomLeft: {fileID: 8898339825272555119, guid: a5655f7f62f31154d96e02fd1145163e, type: 3}
+  dirtInnerBottomRight: {fileID: 1979952682149856187, guid: cb2c0adef5c69894b81792ff441d7b8b, type: 3}
+  dirtSingle: {fileID: 4527496510362940989, guid: 23ff82288adbf364b9dd76342ece5dc4, type: 3}
   mapWidth: 160
   mapHeight: 90
-  magnification: 14
+  magnification: 20
   xOffset: 0
   yOffset: 0
   tileOrder: 00000000010000000200000003000000
@@ -377,5 +390,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f8f44c3a97f1ef41bc94c8f0068f28e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 0.5
   mainCamera: {fileID: 1237969893}

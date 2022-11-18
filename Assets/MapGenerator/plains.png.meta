@@ -239,7 +239,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dirt_inner_top_left
+      name: dirt_inner_bottom_right
       rect:
         serializedVersion: 2
         x: 64
@@ -260,7 +260,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dirt_inner_top_right
+      name: dirt_inner_bottom_left
       rect:
         serializedVersion: 2
         x: 80
@@ -365,7 +365,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dirt_inner_bottem_left
+      name: dirt_inner_top_right
       rect:
         serializedVersion: 2
         x: 64
@@ -386,7 +386,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dirt_inner_bottem_right
+      name: dirt_inner_top_left
       rect:
         serializedVersion: 2
         x: 80
@@ -1093,7 +1093,6 @@ TextureImporter:
       plains_22: -1642188968
       plains_40: -1412269477
       plains_24: -1150899646
-      dirt_inner_bottem_right: 1247526042
       plains_34: -1673586707
       plains_33: -1257330080
       dirt_left: 386996706
@@ -1106,33 +1105,34 @@ TextureImporter:
       plains_12: 1624579691
       dirt_open_right: 346627549
       plains_38: 221716315
+      dirt_inner_bottom_left: -397992393
       plains_27: -778531911
       plains_6: 554472603
       plains_42: 524213584
       plains_28: 183117194
-      dirt_inner_bottem_left: -270797963
       dirt_top: -1372442310
-      dirt_inner_top_left: -1421433811
+      dirt_inner_top_left: 1247526042
       plains_23: 1847370710
       plains_43: 1590439488
       plains_39: 1754917245
       dirt_open_left_and_right: -1379285011
-      dirt_inner_top_right: -397992393
+      dirt_inner_top_right: -270797963
+      dirt_inner_bottom_right: -1421433811
       dirt: 783631899
       dirt_open_left: -1246849483
       plains_29: 1049137768
       dirt_outer_bottem_left: 286543643
       plains_31: 1720351976
-      plains_37: 1305617739
+      dirt_single: -881474398
       dirt_outer_top_right: 837710507
-      dirt_inner_top_left_and_bottem_right: -1328164876
+      plains_37: 1305617739
       dirt_right: 350337203
+      dirt_inner_top_left_and_bottem_right: -1328164876
       plains_26: 944524094
       plains_36: -1226479177
       dirt_bottem: -107815947
       plains_41: -1025899880
       dirt_outer_bottem_right: 1350258343
-      dirt_single: -881474398
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

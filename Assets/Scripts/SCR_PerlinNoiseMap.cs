@@ -9,8 +9,21 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
 
     public GameObject prefabDirt;
     public GameObject prefabGrass;
-    public GameObject prefabGrassPlant;
-    public GameObject prefabBush;
+    // public GameObject prefabGrassPlant;
+    // public GameObject prefabBush;
+    public GameObject dirtTop;
+    public GameObject dirtBottom;
+    public GameObject dirtLeft;
+    public GameObject dirtRight;
+    public GameObject dirtOuterTopLeft;
+    public GameObject dirtOuterTopRight;
+    public GameObject dirtOuterBottomLeft;
+    public GameObject dirtOuterBottomRight;
+    public GameObject dirtInnerTopLeft;
+    public GameObject dirtInnerTopRight;
+    public GameObject dirtInnerBottomLeft;
+    public GameObject dirtInnerBottomRight;
+    public GameObject dirtSingle;
 
     public int mapWidth = 160;
     public int mapHeight = 90;
@@ -43,8 +56,8 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
         {
             { tileOrder[0], prefabDirt },
             { tileOrder[1], prefabGrass },
-            { tileOrder[2], prefabGrassPlant },
-            { tileOrder[3], prefabBush }
+            // { tileOrder[2], prefabGrassPlant },
+            // { tileOrder[3], prefabBush }
         };
     }
 
@@ -114,6 +127,27 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
     }
 
     void CreateTile(int tileId, int x, int y)
+    {
+        /**
+           Creates a new tile using the type id code, group it with common tiles,
+           set it's position and store the gameObject.
+       **/
+
+        GameObject tilePrefab = tileset[tileId];
+        GameObject tileGroup = tileGroups[tileId];
+        GameObject tile = Instantiate(tilePrefab, tileGroup.transform);
+
+        // Scale to 16 pixel tiles and center map
+        float xUnit = x * unitPixels - mapWidth * unitPixels / 2;
+        float yUnit = y * unitPixels - mapHeight * unitPixels / 2;
+
+        tile.name = string.Format("time_x{0}_y{1}", xUnit, yUnit);
+        tile.transform.localPosition = new Vector3(xUnit, yUnit, 0);
+
+        tileGrid[x].Add(tile);
+    }
+
+    void CreateTileEdge(int tileId, int x, int y)
     {
         /**
            Creates a new tile using the type id code, group it with common tiles,
