@@ -193,6 +193,10 @@ MonoBehaviour:
   dirtBottomLeftRight: {fileID: 5826631437278137302, guid: 1cf69f1d4ba79c94c9b18a8286130827, type: 3}
   dirtInnerTopLeftAndBottomRight: {fileID: 9170242678626131629, guid: d6b5e5b946634ef4d98ee894a86294a4, type: 3}
   dirtInnerTopRightAndBottomLeft: {fileID: 1774123512132676139, guid: 46c9875cd58fbba43a3fd2ecfc4ec80b, type: 3}
+  dirtInnerTop: {fileID: 2813297139469238354, guid: b7a7a43d6a62b044d8ac3aeabc5e4d8d, type: 3}
+  dirtInnerBottom: {fileID: 5429943795758447282, guid: abf43e7d96ed26c4597326dfba3ec87d, type: 3}
+  dirtInnerLeft: {fileID: 5769143386653859445, guid: 030d09a0c74e75c418d5b8c69458e548, type: 3}
+  dirtInnerRight: {fileID: 2327238102516089920, guid: e587de19983fe8445abdb280f6079625, type: 3}
   mapWidth: 160
   mapHeight: 90
   magnification: 5

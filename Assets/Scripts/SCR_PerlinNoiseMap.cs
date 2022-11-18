@@ -202,7 +202,7 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
                 if (noiseGrid[x][y] == 0)
                 {
                     // print("dirt edge");
-                    int dirtEdgeTileId = 0;
+                    // int dirtEdgeTileId = 0;
 
                     bool firstRow = false;
                     bool lastRow = false;
@@ -224,12 +224,12 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
                     if (!lastColumn) topTile = noiseGrid[x][y + 1];
 
                     // { 0, prefabDirt },
-                    if (leftTile == 0 && rightTile == 0 && topTile == 0 && bottomTile == 0)
-                    {
-                        // CreateTileEdge(0, 0, x, y);
-                    }
+                    // if (leftTile == 0 && rightTile == 0 && topTile == 0 && bottomTile == 0)
+                    // {
+                    //     // CreateTileEdge(0, 0, x, y);
+                    // }
                     // { 1, dirtTop },
-                    else if (leftTile == 0 && rightTile == 0 && topTile == 1 && bottomTile == 0)
+                    if (leftTile == 0 && rightTile == 0 && topTile == 1 && bottomTile == 0)
                     {
                         CreateTileEdge(0, 1, x, y);
                     }
@@ -303,19 +303,75 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
                     {
                         CreateTileEdge(0, 19, x, y);
                     }
+                    // If the 4 sides are dirt, check corners
+                    else if (leftTile == 0 && rightTile == 0 && topTile == 0 && bottomTile == 0)
+                    {
+                        // Check if any corners are bordered by grass
+                        int topLeftTile = 1;
+                        int topRightTile = 1;
+                        int bottomLeftTile = 1;
+                        int bottomRightTile = 1;
+                        if (!firstRow && !lastColumn) topLeftTile = noiseGrid[x - 1][y + 1];
+                        if (!lastRow && !lastColumn) topRightTile = noiseGrid[x + 1][y + 1];
+                        if (!firstRow && !firstColumn) bottomLeftTile = noiseGrid[x - 1][y - 1];
+                        if (!lastRow && !firstColumn) bottomRightTile = noiseGrid[x + 1][y - 1];
+                        // print($"topLeftTile {topLeftTile} topRightTile {topRightTile} bottomLeftTile {bottomLeftTile} bottomRightTile {bottomRightTile}");
 
-
-
-                    // { 9, dirtInnerTopLeft },
-                    // { 10, dirtInnerTopRight },
-                    // { 11, dirtInnerBottomLeft },
-                    // { 12, dirtInnerBottomRight },
-                    // { 20, dirtInnerTopLeftAndBottomRight },
-                    // { 21, dirtInnerTopRightAndBottomLeft },
-                    // { 22, dirtInnerTop },
-                    // { 23, dirtInnerBottom },
-                    // { 24, dirtInnerLeft },
-                    // { 25, dirtInnerRight },
+                        // { 9, dirtInnerTopLeft },
+                        if (topLeftTile == 1 && topRightTile == 0 && bottomLeftTile == 0 && bottomRightTile == 0)
+                        {
+                            CreateTileEdge(0, 9, x, y);
+                        }
+                        // { 10, dirtInnerTopRight },
+                        else if (topLeftTile == 0 && topRightTile == 1 && bottomLeftTile == 0 && bottomRightTile == 0)
+                        {
+                            CreateTileEdge(0, 10, x, y);
+                        }
+                        // { 11, dirtInnerBottomLeft },
+                        else if (topLeftTile == 0 && topRightTile == 0 && bottomLeftTile == 1 && bottomRightTile == 0)
+                        {
+                            CreateTileEdge(0, 11, x, y);
+                        }
+                        // { 12, dirtInnerBottomRight },
+                        else if (topLeftTile == 0 && topRightTile == 0 && bottomLeftTile == 0 && bottomRightTile == 1)
+                        {
+                            CreateTileEdge(0, 12, x, y);
+                        }
+                        // { 20, dirtInnerTopLeftAndBottomRight },
+                        else if (topLeftTile == 1 && topRightTile == 0 && bottomLeftTile == 0 && bottomRightTile == 1)
+                        {
+                            CreateTileEdge(0, 20, x, y);
+                        }
+                        // { 21, dirtInnerTopRightAndBottomLeft },
+                        else if (topLeftTile == 0 && topRightTile == 1 && bottomLeftTile == 1 && bottomRightTile == 0)
+                        {
+                            CreateTileEdge(0, 21, x, y);
+                        }
+                        // { 22, dirtInnerTop },
+                        else if (topLeftTile == 1 && topRightTile == 1 && bottomLeftTile == 0 && bottomRightTile == 0)
+                        {
+                            print($"inner {topLeftTile} {topRightTile} {bottomLeftTile} {bottomRightTile}");
+                            CreateTileEdge(0, 22, x, y);
+                        }
+                        // { 23, dirtInnerBottom },
+                        else if (topLeftTile == 0 && topRightTile == 0 && bottomLeftTile == 1 && bottomRightTile == 1)
+                        {
+                            print($"inner {topLeftTile} {topRightTile} {bottomLeftTile} {bottomRightTile}");
+                            CreateTileEdge(0, 23, x, y);
+                        }
+                        // { 24, dirtInnerLeft },
+                        else if (topLeftTile == 1 && topRightTile == 0 && bottomLeftTile == 1 && bottomRightTile == 0)
+                        {
+                            print($"inner {topLeftTile} {topRightTile} {bottomLeftTile} {bottomRightTile}");
+                            CreateTileEdge(0, 24, x, y);
+                        }
+                        // { 25, dirtInnerRight },
+                        else if (topLeftTile == 0 && topRightTile == 1 && bottomLeftTile == 0 && bottomRightTile == 1)
+                        {
+                            print($"inner {topLeftTile} {topRightTile} {bottomLeftTile} {bottomRightTile}");
+                            CreateTileEdge(0, 25, x, y);
+                        }
+                    }
                 }
             }
         }
