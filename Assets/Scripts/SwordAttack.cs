@@ -89,10 +89,10 @@ public class SwordAttack : MonoBehaviour
                 isCollidingWithEnemy = true;
             }
         }
-        else
-        {
-            Physics2D.IgnoreCollision(other, swordCollider);
-        }
+        // else
+        // {
+        //     Physics2D.IgnoreCollision(other, swordCollider);
+        // }
     }
 
     private void OnTriggerExit2D(Collider2D other)
