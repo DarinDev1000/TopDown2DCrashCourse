@@ -18,6 +18,7 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
     public int xOffset = 0;
     public int yOffset = 0;
     public List<int> tileOrder = new() { 0, 1, 2, 3 };
+    public float unitPixels = 0.16f;
 
     List<List<int>> noiseGrid = new();
     List<List<GameObject>> tileGrid = new();
@@ -98,7 +99,7 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
         GameObject tile = Instantiate(tilePrefab, tileGroup.transform);
 
         tile.name = string.Format("time_x{0}_y{1}", x, y);
-        tile.transform.localPosition = new Vector3(x, y, 0);
+        tile.transform.localPosition = new Vector3(x * unitPixels, y * unitPixels, 0);
 
         tileGrid[x].Add(tile);
     }
