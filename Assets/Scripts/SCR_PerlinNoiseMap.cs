@@ -5,6 +5,7 @@ using UnityEngine;
 public class SCR_PerlinNoiseMap : MonoBehaviour
 {
     Dictionary<int, GameObject> tileset;
+    Dictionary<int, GameObject> dirtEdgeTileset;
     Dictionary<int, GameObject> tileGroups;
 
     public GameObject prefabDirt;
@@ -30,7 +31,7 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
     public float magnification = 14.0f; // between 4 - 20 recommended
     public int xOffset = 0;
     public int yOffset = 0;
-    public List<int> tileOrder = new() { 0, 1, 2, 3 };
+    // public List<int> tileOrder = new() { 0, 1 };
     public float unitPixels = 0.16f;
 
     List<List<int>> noiseGrid = new();
@@ -43,6 +44,7 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
         CreateTileset();
         CreateTileGroups();
         GenerateMap();
+        GenerateMapEdges();
     }
 
     void CreateTileset()
@@ -54,10 +56,28 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
 
         tileset = new()
         {
-            { tileOrder[0], prefabDirt },
-            { tileOrder[1], prefabGrass },
+            { 0, prefabDirt },
+            { 1, prefabGrass },
             // { tileOrder[2], prefabGrassPlant },
             // { tileOrder[3], prefabBush }
+        };
+
+        dirtEdgeTileset = new()
+        {
+            { 0, prefabDirt },
+            { 1, dirtTop },
+            { 2, dirtBottom },
+            { 3, dirtLeft },
+            { 4, dirtRight },
+            { 5, dirtOuterTopLeft },
+            { 6, dirtOuterTopRight },
+            { 7, dirtOuterBottomLeft },
+            { 8, dirtOuterBottomRight },
+            { 9, dirtInnerTopLeft },
+            { 10, dirtInnerTopRight },
+            { 11, dirtInnerBottomLeft },
+            { 12, dirtInnerBottomRight },
+            { 13, dirtSingle }
         };
     }
 
@@ -114,14 +134,14 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
         float xModified = (x - xOffset) / magnification;
         float yModified = (y - yOffset) / magnification;
         float rawPerlin = Mathf.PerlinNoise(xModified, yModified); // Works better with float inputs
-        // Output can be > 1 and < 0
+                                                                   // Output can be > 1 and < 0
         float clampPerlin = Mathf.Clamp(rawPerlin, 0.0f, 1.0f);
 
         // Scale noise to tile id range
         float scaledPerlin = clampPerlin * tileset.Count;
-        if (scaledPerlin == 4)
+        if (scaledPerlin == tileset.Count)
         {
-            scaledPerlin = 3;
+            scaledPerlin = tileset.Count - 1;
         }
         return Mathf.FloorToInt(scaledPerlin);
     }
@@ -147,22 +167,113 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
         tileGrid[x].Add(tile);
     }
 
-    void CreateTileEdge(int tileId, int x, int y)
+    void GenerateMapEdges()
+    {
+        // Loop through all x values
+        for (int x = 0; x < mapWidth; x++)
+        {
+            // Loop through all y values
+            for (int y = 0; y < mapHeight; y++)
+            {
+                if (noiseGrid[x][y] == 0)
+                {
+                    // print("dirt edge");
+                    int dirtEdgeTileId = 0;
+
+                    bool firstRow = false;
+                    bool lastRow = false;
+                    bool firstColumn = false;
+                    bool lastColumn = false;
+                    if (x == 0) firstRow = true;
+                    if (x == mapWidth - 1) lastRow = true;
+                    if (y == 0) firstColumn = true;
+                    if (y == mapHeight - 1) lastColumn = true;
+
+                    int leftTile = 1;
+                    int rightTile = 1;
+                    int topTile = 1;
+                    int bottomTile = 1;
+
+                    if (!firstRow) leftTile = noiseGrid[x - 1][y];
+                    if (!lastRow) rightTile = noiseGrid[x + 1][y];
+                    if (!firstColumn) bottomTile = noiseGrid[x][y - 1];
+                    if (!lastColumn) topTile = noiseGrid[x][y + 1];
+
+                    // { 0, prefabDirt },
+                    if (leftTile == 0 && rightTile == 0 && topTile == 0 && bottomTile == 0)
+                    {
+                        // CreateTileEdge(0, 0, x, y);
+                    }
+                    // { 1, dirtTop },
+                    else if (leftTile == 0 && rightTile == 0 && topTile == 1 && bottomTile == 0)
+                    {
+                        CreateTileEdge(0, 1, x, y);
+                    }
+                    // { 2, dirtBottom },
+                    else if (leftTile == 0 && rightTile == 0 && topTile == 0 && bottomTile == 1)
+                    {
+                        CreateTileEdge(0, 2, x, y);
+                    }
+                    // { 3, dirtLeft },
+                    else if (leftTile == 1 && rightTile == 0 && topTile == 0 && bottomTile == 0)
+                    {
+                        CreateTileEdge(0, 3, x, y);
+                    }
+                    // { 4, dirtRight },
+                    else if (leftTile == 0 && rightTile == 1 && topTile == 0 && bottomTile == 0)
+                    {
+                        CreateTileEdge(0, 4, x, y);
+                    }
+                    // { 5, dirtOuterTopLeft },
+                    else if (leftTile == 1 && rightTile == 0 && topTile == 1 && bottomTile == 0)
+                    {
+                        CreateTileEdge(0, 5, x, y);
+                    }
+                    // { 6, dirtOuterTopRight },
+                    else if (leftTile == 0 && rightTile == 1 && topTile == 1 && bottomTile == 0)
+                    {
+                        CreateTileEdge(0, 6, x, y);
+                    }
+                    // { 7, dirtOuterBottomLeft },
+                    else if (leftTile == 1 && rightTile == 0 && topTile == 0 && bottomTile == 1)
+                    {
+                        CreateTileEdge(0, 7, x, y);
+                    }
+                    // { 8, dirtOuterBottomRight },
+                    else if (leftTile == 0 && rightTile == 1 && topTile == 0 && bottomTile == 1)
+                    {
+                        CreateTileEdge(0, 8, x, y);
+                    }
+                    // { 13, dirtSingle }
+                    else if (leftTile == 1 && rightTile == 1 && topTile == 1 && bottomTile == 1)
+                    {
+                        CreateTileEdge(0, 13, x, y);
+                    }
+                    // { 9, dirtInnerTopLeft },
+                    // { 10, dirtInnerTopRight },
+                    // { 11, dirtInnerBottomLeft },
+                    // { 12, dirtInnerBottomRight },
+                }
+            }
+        }
+    }
+
+    void CreateTileEdge(int tileId, int dirtEdgeTileId, int x, int y)
     {
         /**
            Creates a new tile using the type id code, group it with common tiles,
            set it's position and store the gameObject.
        **/
 
-        GameObject tilePrefab = tileset[tileId];
+        GameObject dirtEdgeTilePrefab = dirtEdgeTileset[dirtEdgeTileId];
         GameObject tileGroup = tileGroups[tileId];
-        GameObject tile = Instantiate(tilePrefab, tileGroup.transform);
+        GameObject tile = Instantiate(dirtEdgeTilePrefab, tileGroup.transform);
 
         // Scale to 16 pixel tiles and center map
         float xUnit = x * unitPixels - mapWidth * unitPixels / 2;
         float yUnit = y * unitPixels - mapHeight * unitPixels / 2;
 
-        tile.name = string.Format("time_x{0}_y{1}", xUnit, yUnit);
+        tile.name = string.Format("time_x{0}_y{1}_edge", xUnit, yUnit);
         tile.transform.localPosition = new Vector3(xUnit, yUnit, 0);
 
         tileGrid[x].Add(tile);

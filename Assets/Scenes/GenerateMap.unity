@@ -172,8 +172,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabDirt: {fileID: 6915587291823720032, guid: b9f8958c84516154397134d7cd68293b, type: 3}
   prefabGrass: {fileID: 4370505670041067488, guid: ac295648d2454eb4cb64a211719e862b, type: 3}
-  prefabGrassPlant: {fileID: 4527496510362940989, guid: 23ff82288adbf364b9dd76342ece5dc4, type: 3}
-  prefabBush: {fileID: 4527496510362940989, guid: 23ff82288adbf364b9dd76342ece5dc4, type: 3}
   dirtTop: {fileID: 8204220480350300229, guid: 0bd05059eb0c4884680097009a924fcc, type: 3}
   dirtBottom: {fileID: 1689317422295238730, guid: da86105229affaf43a1aa1b17a48c4da, type: 3}
   dirtLeft: {fileID: 5791461263409164636, guid: 610181805d7c59249b73d26f025d9953, type: 3}
@@ -189,10 +187,9 @@ MonoBehaviour:
   dirtSingle: {fileID: 4527496510362940989, guid: 23ff82288adbf364b9dd76342ece5dc4, type: 3}
   mapWidth: 160
   mapHeight: 90
-  magnification: 20
+  magnification: 5
   xOffset: 0
   yOffset: 0
-  tileOrder: 00000000010000000200000003000000
   unitPixels: 0.16
 --- !u!483693784 &247309930
 TilemapRenderer:
