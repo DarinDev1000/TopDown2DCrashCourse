@@ -10,8 +10,9 @@ public class HealthBarController : MonoBehaviour
     private Slider slider;
     private Image fill;
 
-    private void Start()
+    private void Awake()
     {
+        // Start method was happening before slider existed
         slider = gameObject.GetComponent<Slider>();
         fill = transform.Find("Fill").GetComponent<Image>();
     }
