@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public float speed;
     public float detectionDistance;
     private float distanceToTarget;
+    public float randomVectorVariation = 1f;
     public float maxHealth;
     private float health;
     public float Health
@@ -216,8 +217,13 @@ public class Enemy : MonoBehaviour
 
     private void MoveToTarget()
     {
-        // transform.position, target.transform.position
         float moveSpeed = speed * Time.deltaTime;
-        transform.position = Vector2.MoveTowards(transform.position, target.transform.position, moveSpeed);
+
+        float random1 = Random.Range(-randomVectorVariation, randomVectorVariation);
+        float random2 = Random.Range(-randomVectorVariation, randomVectorVariation);
+        // Vector2 currentVariation = new Vector2(transform.position.x + Random.Range(-randomVectorVariation, randomVectorVariation), transform.position.y + Random.Range(-randomVectorVariation, randomVectorVariation));
+        Vector2 targetVariation = new Vector2(target.transform.position.x + random1, target.transform.position.y + random2);
+
+        transform.position = Vector2.MoveTowards(transform.position, targetVariation, moveSpeed);
     }
 }

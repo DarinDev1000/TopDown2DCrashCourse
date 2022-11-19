@@ -139,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   detectionDistance: 6
+  randomVectorVariation: 1
   maxHealth: 2
   damage: 1
   timeBetweenAttacks: 2
