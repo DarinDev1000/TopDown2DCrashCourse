@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
 
-    public HealthBarController HealthBar;
+    public List<HealthBarController> HealthBars;
 
     Vector2 movementInput;
     SpriteRenderer spriteRenderer;
@@ -30,7 +30,10 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         currentHealth = maxHealth;
-        HealthBar.SetMaxHealth(maxHealth);
+        foreach (var healthBar in HealthBars)
+        {
+            healthBar.SetMaxHealth(maxHealth);
+        }
     }
 
     public void SetPlayerMovement(Vector2 playerMovement)
@@ -165,6 +168,9 @@ public class PlayerController : MonoBehaviour
     {
         currentHealth -= damage;
         print(currentHealth);
-        HealthBar.SetHealth(currentHealth);
+        foreach (var healthBar in HealthBars)
+        {
+            healthBar.SetHealth(currentHealth);
+        }
     }
 }
