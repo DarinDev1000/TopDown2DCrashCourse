@@ -201,7 +201,7 @@ MonoBehaviour:
   magnification: 12
   xOffset: 0
   yOffset: 0
-  unitPixels: 0.16
+  unitPixels: 1
   tilemapGrid: {fileID: 0}
   tilemap: {fileID: 0}
 --- !u!156049354 &247309932
@@ -241,7 +241,7 @@ Grid:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1128352608}
   m_Enabled: 1
-  m_CellSize: {x: 0.16, y: 0.16, z: 0}
+  m_CellSize: {x: 1, y: 1, z: 0}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0

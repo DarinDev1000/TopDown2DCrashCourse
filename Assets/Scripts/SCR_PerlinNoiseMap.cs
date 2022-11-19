@@ -45,7 +45,7 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
     public int xOffset = 0;
     public int yOffset = 0;
     // public List<int> tileOrder = new() { 0, 1 };
-    public float unitPixels = 0.16f;
+    public float unitPixels = 1f; // Grid PPU
 
     List<List<int>> noiseGrid = new();
     List<List<GameObject>> tileGrid = new();

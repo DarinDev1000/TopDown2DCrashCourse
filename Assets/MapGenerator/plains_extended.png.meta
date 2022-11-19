@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -1173,7 +1173,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      plains_extended_14: -1072446160
+      plains_extended_1: 433275058
       plains_extended_43: -751311301
       plains_extended_13: 1651820351
       plains_extended_26: 2020833531
@@ -1219,8 +1219,8 @@ TextureImporter:
       plains_extended_15: 377473486
       plains_extended_25: -844440990
       dirt_inner_top: -869326427
+      plains_extended_14: -1072446160
       plains_extended_28: -1729442806
-      plains_extended_1: 433275058
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 
