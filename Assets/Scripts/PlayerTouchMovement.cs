@@ -63,6 +63,8 @@ public class PlayerTouchMovement : MonoBehaviour
             Joystick.Knob.anchoredPosition = Vector2.zero;
             Joystick.gameObject.SetActive(false);
             MovementAmount = Vector2.zero;
+            // Also stop the player
+            PlayerController.SetPlayerMovement(Vector2.zero);
         }
 
         // Handle Attack Finger
@@ -138,7 +140,7 @@ public class PlayerTouchMovement : MonoBehaviour
         // Player.transform.LookAt(Player.transform.position + scaledMovement, Vector3.up);
 
         // Actually move the player
-        if (MovementAmount.x > 0 || MovementAmount.y > 0)
+        if (MovementFinger != null)
         {
             PlayerController.SetPlayerMovement(scaledMovement);
         }
