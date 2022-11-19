@@ -74,7 +74,7 @@ public class SCR_PerlinNoiseMap : MonoBehaviour
         {
             { 0, prefabDirt },
             { 1, prefabGrass },
-            { 2, prefabBush }
+            // { 2, prefabBush }
             // { tileOrder[2], prefabGrassPlant },
         };
 
