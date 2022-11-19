@@ -27,11 +27,10 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // // Update is called once per frame
-    // void Update()
-    // {
-
-    // }
+    public void SetPlayerMovement(Vector2 playerMovement)
+    {
+        movementInput = playerMovement;
+    }
 
     private void FixedUpdate()
     {

@@ -11,13 +11,14 @@ public class PlayerTouchMovement : MonoBehaviour
     [SerializeField]
     private FloatingJoystick Joystick; // This is the custom class I copied
     [SerializeField]
-    private UnityEngine.InputSystem.PlayerInput Player;
+    private PlayerController PlayerController;
 
     private Finger MovementFinger;
     private Vector2 MovementAmount;
 
     private void OnEnable()
     {
+        PlayerController = gameObject.GetComponent<PlayerController>();
         EnhancedTouchSupport.Enable();
         ETouch.Touch.onFingerDown += HandleFingerDown;
         ETouch.Touch.onFingerUp += HandleFingerUp;
@@ -111,15 +112,12 @@ public class PlayerTouchMovement : MonoBehaviour
     private void Update()
     {
         // Move the player
-        Vector3 scaledMovement = Time.deltaTime * new Vector3(
-            MovementAmount.x,
-            MovementAmount.y,
-            0
-        );
+        Vector2 scaledMovement = new(MovementAmount.x, MovementAmount.y);
+        print(scaledMovement);
 
-        Player.transform.LookAt(Player.transform.position + scaledMovement, Vector3.up);
+        // Player.transform.LookAt(Player.transform.position + scaledMovement, Vector3.up);
 
         // Actually move the player
-        // Player. (scaledMovement);
+        PlayerController.SetPlayerMovement(scaledMovement);
     }
 }
