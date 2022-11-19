@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.InputSystem.EnhancedTouch;
 using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
@@ -12,7 +11,7 @@ public class PlayerTouchMovement : MonoBehaviour
     [SerializeField]
     private FloatingJoystick Joystick; // This is the custom class I copied
     [SerializeField]
-    private NavMeshAgent Player;
+    private UnityEngine.InputSystem.PlayerInput Player;
 
     private Finger MovementFinger;
     private Vector2 MovementAmount;
@@ -107,5 +106,20 @@ public class PlayerTouchMovement : MonoBehaviour
         }
 
         return StartPosition;
+    }
+
+    private void Update()
+    {
+        // Move the player
+        Vector3 scaledMovement = Time.deltaTime * new Vector3(
+            MovementAmount.x,
+            MovementAmount.y,
+            0
+        );
+
+        Player.transform.LookAt(Player.transform.position + scaledMovement, Vector3.up);
+
+        // Actually move the player
+        // Player. (scaledMovement);
     }
 }
