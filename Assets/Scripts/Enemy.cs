@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    Animator animator;
+    private Animator animator;
+    private GameObject target;
 
+    public float speed;
+    public float detectionDistance;
+    private float distanceToTarget;
     public float maxHealth;
     private float health;
     public float Health
@@ -48,6 +52,7 @@ public class Enemy : MonoBehaviour
         health = maxHealth;
         animator = GetComponent<Animator>();
         // enemyCollider = GetComponent<Collider2D>();
+        target = GameObject.FindGameObjectWithTag("Player");
     }
 
     public void Defeated()
@@ -91,6 +96,13 @@ public class Enemy : MonoBehaviour
         {
             DoAttack();
         }
+
+        // Find distance to target and start moving
+        distanceToTarget = Vector2.Distance(transform.position, target.transform.position);
+        if (distanceToTarget <= detectionDistance)
+        {
+            MoveToTarget();
+        }
     }
 
     public void Idle()
@@ -133,7 +145,7 @@ public class Enemy : MonoBehaviour
         {
             if (other.TryGetComponent<PlayerController>(out var player))
             {
-                print("colliding with player");
+                // print("colliding with player");
                 // collidingEnemies.Add(player);
                 collidingPlayer = player;
                 isCollidingWithPlayer = true;
@@ -166,7 +178,7 @@ public class Enemy : MonoBehaviour
         if (CheckAttackCooldown())
         {
             attackCooldown = 0f;
-            print($"attackCooldown {attackCooldown}");
+            // print($"attackCooldown {attackCooldown}");
             // print($"collidingEnemies {collidingEnemies.Count}");
             if (isCollidingWithPlayer && collidingPlayer != null)
             {
@@ -176,7 +188,7 @@ public class Enemy : MonoBehaviour
                 // print($"collidingPlayer health {collidingPlayer.Health}");
                 // print($"damage {damage}");
                 collidingPlayer.TakeDamage(damage);
-                print($"collidingPlayer health {collidingPlayer.Health}");
+                // print($"collidingPlayer health {collidingPlayer.Health}");
                 if (collidingPlayer.Health <= 0)
                 {
                     // enemiesToRemove.Add(collidingEnemy);
@@ -200,5 +212,12 @@ public class Enemy : MonoBehaviour
     public void ResetAttackCooldown()
     {
         attackCooldown = 0f;
+    }
+
+    private void MoveToTarget()
+    {
+        // transform.position, target.transform.position
+        float moveSpeed = speed * Time.deltaTime;
+        transform.position = Vector2.MoveTowards(transform.position, target.transform.position, moveSpeed);
     }
 }
