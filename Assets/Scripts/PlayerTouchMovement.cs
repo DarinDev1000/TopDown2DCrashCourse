@@ -138,6 +138,9 @@ public class PlayerTouchMovement : MonoBehaviour
         // Player.transform.LookAt(Player.transform.position + scaledMovement, Vector3.up);
 
         // Actually move the player
-        PlayerController.SetPlayerMovement(scaledMovement);
+        if (MovementAmount.x > 0 || MovementAmount.y > 0)
+        {
+            PlayerController.SetPlayerMovement(scaledMovement);
+        }
     }
 }
