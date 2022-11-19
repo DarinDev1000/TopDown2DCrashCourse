@@ -12,6 +12,7 @@ public class PlayerTouchMovement : MonoBehaviour
     private FloatingJoystick Joystick; // This is the custom class I copied
     private PlayerController PlayerController;
     private Finger MovementFinger;
+    private Finger AttackFinger;
     private Vector2 MovementAmount;
 
     private void OnEnable()
@@ -35,6 +36,7 @@ public class PlayerTouchMovement : MonoBehaviour
 
     private void HandleFingerDown(Finger TouchedFinger)
     {
+        // Handle Movement Finger
         if (MovementFinger == null && TouchedFinger.screenPosition.x <= Screen.width / 2f)
         {
             MovementFinger = TouchedFinger;
@@ -43,10 +45,18 @@ public class PlayerTouchMovement : MonoBehaviour
             Joystick.RectTransform.sizeDelta = JoystickSize;
             Joystick.RectTransform.anchoredPosition = ClampStartPosition(TouchedFinger.screenPosition);
         }
+
+        // Handle Attack Finger
+        if (AttackFinger == null && TouchedFinger.screenPosition.x > Screen.width / 2f)
+        {
+            AttackFinger = TouchedFinger;
+            PlayerController.TrySwordAttack();
+        }
     }
 
     private void HandleFingerUp(Finger LostFinger)
     {
+        // Handle Movement Finger
         if (LostFinger == MovementFinger)
         {
             MovementFinger = null;
@@ -54,10 +64,17 @@ public class PlayerTouchMovement : MonoBehaviour
             Joystick.gameObject.SetActive(false);
             MovementAmount = Vector2.zero;
         }
+
+        // Handle Attack Finger
+        if (LostFinger == AttackFinger)
+        {
+            AttackFinger = null;
+        }
     }
 
     private void HandleFingerMove(Finger MovedFinger)
     {
+        // Handle Movement Finger
         if (MovedFinger == MovementFinger)
         {
             Vector2 knobPosition;
@@ -82,6 +99,9 @@ public class PlayerTouchMovement : MonoBehaviour
             Joystick.Knob.anchoredPosition = knobPosition;
             MovementAmount = knobPosition / maxMovement;
         }
+
+        // Handle Attack Finger
+        // Don't need to currently handle attack finger moving
     }
 
     private Vector2 ClampStartPosition(Vector2 StartPosition)
