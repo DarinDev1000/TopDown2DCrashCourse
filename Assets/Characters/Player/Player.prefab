@@ -247,6 +247,9 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   swordAttack: {fileID: 7616333963939079319}
+  maxHealth: 100
+  currentHealth: 0
+  HealthBar: {fileID: 7926295725442182524, guid: fbd31249899089b4096c2345d57577bb, type: 3}
 --- !u!50 &1541045572855666879
 Rigidbody2D:
   serializedVersion: 4
@@ -328,7 +331,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JoystickSize: {x: 300, y: 300}
   Joystick: {fileID: 0}
-  PlayerController: {fileID: 3830448558434710570}
 --- !u!114 &1840180848235246418
 MonoBehaviour:
   m_ObjectHideFlags: 0

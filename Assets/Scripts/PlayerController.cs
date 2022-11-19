@@ -9,6 +9,10 @@ public class PlayerController : MonoBehaviour
     public float collisionOffset = 0.05f;
     public ContactFilter2D movementFilter;
     public SwordAttack swordAttack;
+    public int maxHealth = 100;
+    public int currentHealth;
+
+    public HealthBarController HealthBar;
 
     Vector2 movementInput;
     SpriteRenderer spriteRenderer;
@@ -25,6 +29,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        currentHealth = maxHealth;
+        HealthBar.SetMaxHealth(maxHealth);
     }
 
     public void SetPlayerMovement(Vector2 playerMovement)
@@ -114,6 +120,7 @@ public class PlayerController : MonoBehaviour
     void OnFire()
     {
         TrySwordAttack();
+        TakeDamage(19);
     }
 
     public void TrySwordAttack()
@@ -152,5 +159,12 @@ public class PlayerController : MonoBehaviour
     public void UnlockMovement()
     {
         canMove = true;
+    }
+
+    void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        print(currentHealth);
+        HealthBar.SetHealth(currentHealth);
     }
 }
