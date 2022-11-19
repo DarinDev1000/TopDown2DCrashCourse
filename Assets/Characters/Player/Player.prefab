@@ -328,7 +328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JoystickSize: {x: 300, y: 300}
   Joystick: {fileID: 0}
-  Player: {fileID: 8849036036823204859}
+  PlayerController: {fileID: 3830448558434710570}
 --- !u!114 &1840180848235246418
 MonoBehaviour:
   m_ObjectHideFlags: 0

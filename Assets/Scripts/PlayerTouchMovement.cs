@@ -10,15 +10,15 @@ public class PlayerTouchMovement : MonoBehaviour
     private Vector2 JoystickSize = new(300, 300);
     [SerializeField]
     private FloatingJoystick Joystick; // This is the custom class I copied
-    [SerializeField]
     private PlayerController PlayerController;
-
     private Finger MovementFinger;
     private Vector2 MovementAmount;
 
     private void OnEnable()
     {
+        // Get the PlayerController instance currently attached to player
         PlayerController = gameObject.GetComponent<PlayerController>();
+
         EnhancedTouchSupport.Enable();
         ETouch.Touch.onFingerDown += HandleFingerDown;
         ETouch.Touch.onFingerUp += HandleFingerUp;
@@ -113,7 +113,7 @@ public class PlayerTouchMovement : MonoBehaviour
     {
         // Move the player
         Vector2 scaledMovement = new(MovementAmount.x, MovementAmount.y);
-        print(scaledMovement);
+        // print(scaledMovement);
 
         // Player.transform.LookAt(Player.transform.position + scaledMovement, Vector3.up);
 
