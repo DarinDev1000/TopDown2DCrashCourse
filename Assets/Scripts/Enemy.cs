@@ -35,10 +35,19 @@ public class Enemy : MonoBehaviour
     }
     // EnemyAnimationState animationState = EnemyAnimationState.idle;
 
+    // private Collider2D enemyCollider;
+    public float damage = 1;
+    public float timeBetweenAttacks = 0.5f;
+
+    private float attackCooldown = 100f;
+    private bool isCollidingWithPlayer = false;
+    private PlayerController collidingPlayer;
+
     void Start()
     {
         health = maxHealth;
         animator = GetComponent<Animator>();
+        // enemyCollider = GetComponent<Collider2D>();
     }
 
     public void Defeated()
@@ -53,6 +62,9 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Update attack cooldown timer
+        attackCooldown += Time.deltaTime;
+
         // Change animation if low health
         if (Health < maxHealth)
         {
@@ -71,6 +83,13 @@ public class Enemy : MonoBehaviour
             {
                 Jump();
             }
+        }
+
+        // Try to attack player
+        if (isCollidingWithPlayer)
+        // print($"isCollidingWithPlayer {isCollidingWithPlayer}");
+        {
+            DoAttack();
         }
     }
 
@@ -104,5 +123,82 @@ public class Enemy : MonoBehaviour
         {
             animator.SetBool(state.ToString(), true);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // print("slime OnTriggerEnter2D");
+        // print($"tag {other.tag}");
+        if (other.CompareTag("Player"))
+        {
+            if (other.TryGetComponent<PlayerController>(out var player))
+            {
+                print("colliding with player");
+                // collidingEnemies.Add(player);
+                collidingPlayer = player;
+                isCollidingWithPlayer = true;
+            }
+        }
+    }
+
+    // private void OnCollisionEnter2D(Collision2D collision)
+    // {
+    //     print("slime OnCollisionEnter2D");
+    //     // print($"tag {collision}");
+    // }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        // print("slime OnTriggerExit2D");
+        if (other.CompareTag("Player"))
+        {
+            if (other.TryGetComponent<PlayerController>(out var player))
+            {
+                // collidingEnemies.Remove(enemy);
+                collidingPlayer = null;
+                isCollidingWithPlayer = false;
+            }
+        }
+    }
+
+    public void DoAttack()
+    {
+        if (CheckAttackCooldown())
+        {
+            attackCooldown = 0f;
+            print($"attackCooldown {attackCooldown}");
+            // print($"collidingEnemies {collidingEnemies.Count}");
+            if (isCollidingWithPlayer && collidingPlayer != null)
+            {
+                // List<Enemy> enemiesToRemove = new();
+                // foreach (var collidingEnemy in collidingEnemies)
+                // {
+                // print($"collidingPlayer health {collidingPlayer.Health}");
+                // print($"damage {damage}");
+                collidingPlayer.TakeDamage(damage);
+                print($"collidingPlayer health {collidingPlayer.Health}");
+                if (collidingPlayer.Health <= 0)
+                {
+                    // enemiesToRemove.Add(collidingEnemy);
+                    collidingPlayer = null;
+                }
+            }
+            // foreach (var removeEnemy in enemiesToRemove)
+            // {
+            //     collidingEnemies.Remove(removeEnemy);
+            // }
+
+        }
+    }
+
+    public bool CheckAttackCooldown()
+    {
+        if (attackCooldown >= timeBetweenAttacks) return true;
+        return false;
+    }
+
+    public void ResetAttackCooldown()
+    {
+        attackCooldown = 0f;
     }
 }

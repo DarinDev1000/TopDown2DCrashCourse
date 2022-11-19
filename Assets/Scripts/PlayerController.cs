@@ -9,8 +9,6 @@ public class PlayerController : MonoBehaviour
     public float collisionOffset = 0.05f;
     public ContactFilter2D movementFilter;
     public SwordAttack swordAttack;
-    public int maxHealth = 100;
-    public int currentHealth;
 
     public List<HealthBarController> HealthBars;
 
@@ -22,6 +20,25 @@ public class PlayerController : MonoBehaviour
 
     bool canMove = true;
 
+    public float maxHealth;
+    private float health;
+    public float Health
+    {
+        set
+        {
+            // print($"Health: {value}");
+            health = value;
+            if (health <= 0)
+            {
+                // Defeated(); // TODO:
+            }
+        }
+        get
+        {
+            return health;
+        }
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +46,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        currentHealth = maxHealth;
+        Health = maxHealth;
         foreach (var healthBar in HealthBars)
         {
             healthBar.SetMaxHealth(maxHealth);
@@ -123,7 +140,7 @@ public class PlayerController : MonoBehaviour
     void OnFire()
     {
         TrySwordAttack();
-        TakeDamage(19);
+        // TakeDamage(19); // For testing
     }
 
     public void TrySwordAttack()
@@ -164,13 +181,12 @@ public class PlayerController : MonoBehaviour
         canMove = true;
     }
 
-    void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
-        currentHealth -= damage;
-        print(currentHealth);
+        Health -= damage;
         foreach (var healthBar in HealthBars)
         {
-            healthBar.SetHealth(currentHealth);
+            healthBar.SetHealth(Health);
         }
     }
 }
