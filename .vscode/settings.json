@@ -51,8 +51,10 @@
         "temp/": true,
         "Temp/": true
     },
-    "editor.formatOnSave": true,
-    "editor.formatOnPaste": true,
-    "editor.detectIndentation": false,
-    "editor.tabSize": 4,
+    "[csharp]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnPaste": true,
+        "editor.detectIndentation": false,
+        "editor.tabSize": 4,
+    }
 }
