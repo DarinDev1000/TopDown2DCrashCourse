@@ -289,7 +289,7 @@ BoxCollider2D:
   m_Offset: {x: 0.00013527274, y: -0.038744673}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.2}
+    pivot: {x: 0.5, y: 0.20833333}
     oldSize: {x: 3, y: 3}
     newSize: {x: 0.48, y: 0.48}
     adaptiveTilingThreshold: 0.5
@@ -450,7 +450,8 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3713745471935174312, guid: 8f2987fab0730684c8c4d01d315faf8f, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f2987fab0730684c8c4d01d315faf8f, type: 3}
 --- !u!114 &3573642004680458339 stripped
