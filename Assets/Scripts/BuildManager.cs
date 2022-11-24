@@ -8,11 +8,12 @@ using UnityEngine.Tilemaps;
 public class BuildManager : MonoBehaviour
 {
     public Tilemap tilemap;
-    public Tile[] tiles;
-    public RuleTile[] ruleTiles;
-    public List<GameObject> UITiles;
-
+    // public Tile[] tiles;
+    // public RuleTile[] ruleTiles;
     public List<TileBase> _allTiles = new();
+
+    private List<GameObject> UITiles = new();
+
 
     public int selectedTile = 0;
 
@@ -22,17 +23,21 @@ public class BuildManager : MonoBehaviour
     {
 
         int i = 0;
-        foreach (Tile tile in tiles)
+        foreach (TileBase tile in _allTiles)
         {
-            _allTiles.Add(tile);
-            print(tile.GetType());
-
             GameObject UITile = new GameObject("UI Tile");
             UITile.transform.parent = tileGridUI;
             UITile.transform.localScale = new Vector3(1f, 1f, 1f);
 
             Image UIImage = UITile.AddComponent<Image>();
-            UIImage.sprite = tile.sprite;
+            if (tile.GetType() == typeof(Tile))
+            {
+                UIImage.sprite = ((Tile)tile).sprite;
+            }
+            else if (tile.GetType() == typeof(RuleTile))
+            {
+                UIImage.sprite = ((RuleTile)tile).m_DefaultSprite;
+            }
 
             Color tileColor = UIImage.color;
             tileColor.a = 0.5f;
@@ -47,37 +52,11 @@ public class BuildManager : MonoBehaviour
 
             i++;
         }
-
-        int j = i;
-        foreach (RuleTile tile in ruleTiles)
-        {
-            _allTiles.Add(tile);
-            print(tile.GetType());
-
-            GameObject UITile = new GameObject("UI Tile");
-            UITile.transform.parent = tileGridUI;
-            UITile.transform.localScale = new Vector3(1f, 1f, 1f);
-
-            Image UIImage = UITile.AddComponent<Image>();
-            UIImage.sprite = tile.m_DefaultSprite;
-
-            Color tileColor = UIImage.color;
-            tileColor.a = 0.5f;
-
-            if (j == selectedTile)
-            {
-                tileColor.a = 1f;
-            }
-            UIImage.color = tileColor;
-
-            UITiles.Add(UITile);
-
-            j++;
-        }
     }
 
     void Update()
     {
+        // Select tile from menu
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             selectedTile = 0;
@@ -116,8 +95,7 @@ public class BuildManager : MonoBehaviour
             Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             // Create the tile on click
-            // tilemap.SetTile(tilemap.WorldToCell(position), tiles[selectedTile]);
-            tilemap.SetTile(tilemap.WorldToCell(position), (TileBase)_allTiles[selectedTile]);
+            tilemap.SetTile(tilemap.WorldToCell(position), _allTiles[selectedTile]);
         }
         // Remove tile on right click
         if (Input.GetMouseButtonDown(1))
